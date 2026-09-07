@@ -1,14 +1,28 @@
 import createTodo from "./todo";
 import { createProject } from "./project";
-import { renderProjects } from "./display";
+import { renderProjects, renderTodos } from "./display";
 
 
 
-const project1 = createProject("Business trip");
-const project2 = createProject("Local Wedding");
-const project3 = createProject("Travel Plans");
 
 
-const render = renderProjects([project1, project2, project3]);
 
-console.log(render)
+
+
+
+
+
+
+
+
+
+
+const project1 = createProject("Sickness");
+
+
+
+project1.addTodo(createTodo("Yo", "Yeah", "tomorrow", "high"));
+project1.addTodo(createTodo("yeah", "yo", "today", "medium"));
+
+renderTodos(project1.todos);
+
