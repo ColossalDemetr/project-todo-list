@@ -1,0 +1,21 @@
+.header {
+    grid-column: 1 / -1;
+
+
+    display: flex;
+    align-items: center;
+
+
+    border-radius: 1rem 1rem 0 0;
+
+    gap: 0.6rem;
+    padding: 1rem;
+    background-color: #386641;
+
+    /* border: 1px solid black; */
+}
+
+.header img {
+    width: 30px;
+    height: auto;
+}

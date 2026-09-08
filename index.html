@@ -5,24 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/header.css">
+    <link rel="stylesheet" href="src/styles/sidebar.css">
+    <link rel="stylesheet" href="src/styles/todos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     
     <div class="wrapper">
 
         <header class="header">
-            <h1>// Todo List</h1>
+            <img src="images/logo.svg" alt="Todo-list">
+            <h1>Todo List</h1>
+            
         </header>
 
-        <aside class="sidebar">
+        <aside class="sidebar"> 
             <ul class="sidebar-list">
+                <p class="paragraph-sidebar">DEFAULTS</p>
                 <li class="sidebar-list-item"><a href="###">Home</a></li>
                 <li class="sidebar-list-item"><a href="###">Today</a></li>
                 <li class="sidebar-list-item"><a href="###">Week</a></li>
 
-                <li class="sidebar-list-item">
-                    Projects
+                <li class="sidebar-list-item-inside"> 
                     <ul class="projects-list">
+                        <p class="paragraph-sidebar">PROJECTS</p>
                         <li class="sidebar-list-item"><a href="###">Work</a></li>
                         <li class="sidebar-list-item"><a href="###">Study</a></li>
                         <li class="sidebar-list-item"><a href="###">Graduation</a></li>
@@ -32,7 +41,9 @@
                 <li class="sidebar-list-item" id="notes"><a href="###">Notes</a></li>
             </ul>
 
-            <div class="new-todo">+</div>
+            <div class="img-wrapper">
+                <img src="/images/plus.svg" class="new-todo" id="add-todo-button" alt="plus-icon">
+            </div>
 
         </aside>
 
