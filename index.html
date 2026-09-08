@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <div class="toast" id="toast">Please enter a task name!</div>
     
     <div class="wrapper">
 
@@ -56,7 +58,11 @@
 
     <div class="modal-overlay">
         <div class="modal">
-            <input type="text" placeholder="Give your task a name…" id="todo-title">
+            <div class="modal-button-close">
+                <button class="close-modal-window" id="close-modal-window">×</button>
+            </div>
+
+            <input type="text" placeholder="Give your task a name…" id="todo-title" required>
             <input type="text" placeholder="Provide more details…" id="todo-desc">
             
             <div class="modal-time-and-priority">
@@ -67,7 +73,7 @@
                 <div class="divider"></div>
                 <div class="modal-priority">
                     <p>Give it a priority</p>
-                    <select id="todo-prior">
+                    <select id="todo-prior" required>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>

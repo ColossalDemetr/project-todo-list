@@ -34,3 +34,20 @@ body {
     grid-template-rows: 1fr 2fr;
 }
 
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #bc4749;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 101;
+}
+
+.toast.show {
+    opacity: 1;
+}
