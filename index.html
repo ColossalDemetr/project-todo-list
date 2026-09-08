@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" href="src/styles/modal.css">
     <link rel="stylesheet" href="src/styles/main.css">
     <link rel="stylesheet" href="src/styles/header.css">
     <link rel="stylesheet" href="src/styles/sidebar.css">
@@ -53,6 +54,35 @@
 
     </div>
 
-<script src="dist/main.js"></script>    
+    <div class="modal-overlay">
+        <div class="modal">
+            <input type="text" placeholder="Give your task a name…" id="todo-title">
+            <input type="text" placeholder="Provide more details…" id="todo-desc">
+            
+            <div class="modal-time-and-priority">
+                <div class="modal-time">
+                    <p>When does it need to be done?</p>
+                    <input type="date" id="todo-date">
+                </div>
+                <div class="divider"></div>
+                <div class="modal-priority">
+                    <p>Give it a priority</p>
+                    <select id="todo-prior">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-button">
+                <button class="add" id="add-todo-button-submit">Add</button>
+            </div>
+        </div> 
+    </div>
+    
+
+
+<script src="dist/main.js"></script>
 </body>
 </html>

@@ -17,3 +17,14 @@ export const renderTodos = (todos) => {
     });
     
 };
+
+export const openModal = () => {
+    const addTodoButtonNow = document.querySelector("#add-todo-button");
+    const modal = document.querySelector(".modal");
+    const modalOverlay = document.querySelector(".modal-overlay");
+
+    addTodoButtonNow.addEventListener("click", () => {
+        modal.classList.toggle("active");
+        modalOverlay.classList.toggle("active")
+    });
+};

@@ -1,0 +1,130 @@
+.modal {
+    display: none;
+}
+
+.modal.active {
+    display: grid;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    z-index: 100;
+
+    grid-template-rows: 3rem 10rem;
+
+    width: 50vw;
+    height: 60vh;
+
+    padding: 2rem;
+    border-radius: 2rem;
+
+}
+
+.modal.active,
+.modal input {
+    background-color: #F2E8CF;
+}
+
+#todo-title {
+    height: 3rem;
+    border-bottom: 1px solid #386641;
+}
+
+#todo-desc {
+    border-bottom: 1px solid #386641;
+}
+
+.modal-time-and-priority {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    /* border-bottom: 1px solid #386641; */
+}
+
+.modal-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+#todo-date {
+    background-color: #bdb6a6;
+    border-radius: 1rem;
+}
+
+.divider {
+    width: 1px;
+    background: #386641;
+    height: 50%;
+    display: flex;
+    justify-self: center;
+}
+
+.modal-priority {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+}
+
+.modal input {
+    border: none;
+    padding-left: 2rem;
+    
+}
+
+.modal input:focus, .modal select:focus {
+    outline: none;
+}
+
+.modal-overlay {
+    display: none;
+}
+
+.modal-overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.modal-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-button button {
+    width: 10rem;
+    height: 4rem;
+    border-radius: 2rem;
+    border: 2px solid #386641;
+    color: #386641;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+
+    transition: transform 0.4s ease, background-color 0.4s ease-in-out;    
+}
+
+.modal-button button:hover {
+    background-color: #cfc7b2;
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.modal-button button:active {
+    background-color: #aaa491;
+}

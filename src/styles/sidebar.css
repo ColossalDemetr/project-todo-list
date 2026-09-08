@@ -6,6 +6,8 @@
     display: grid;
 
     gap: 2rem;
+
+    border-right: 2px solid #BC4749;
 }
 
 
@@ -21,6 +23,7 @@
     align-items: center;
 
     padding: 1rem;
+
 }
 
 #add-todo-button {
@@ -29,6 +32,8 @@
 
     border-radius: 1.5rem;
     transition: background-color 0.3s ease;
+
+    cursor: pointer;
 }
 
 #add-todo-button:hover {
