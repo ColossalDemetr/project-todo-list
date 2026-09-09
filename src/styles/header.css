@@ -13,6 +13,10 @@
     background-color: #386641;
     color: #BC4749;
 
+    height: 15vh;
+    min-height: 10vh;
+    max-height: 20vh;
+
     /* border: 1px solid black; */
 }
 

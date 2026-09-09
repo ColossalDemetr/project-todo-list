@@ -13,11 +13,18 @@ export const renderTodos = (todos, project, saveToStorage) => {
     mainContent.innerHTML = "";
 
     todos.forEach((todo, index) => {
+        // Main Container
         const card = document.createElement("div");
         card.classList.add("todo-card");
 
+
+        // Main todo div For TITLE & CHECKBOX
+        const mainTodoDiv = document.createElement("div");
+        mainTodoDiv.classList.add("main-todo-div");
+
         const checkBox = document.createElement("input")
         checkBox.type = "checkbox";
+        checkBox.classList.add("main-todo-div");
 
         checkBox.addEventListener("click", () => {
             todo.completed = !todo.completed;
@@ -25,16 +32,17 @@ export const renderTodos = (todos, project, saveToStorage) => {
 
         const title = document.createElement("h3");
         title.textContent = todo.title;
+        title.classList.add("main-todo-div");
 
-        const desc = document.createElement("p");
-        desc.textContent = todo.description;
+        // Button DIV
 
-        const date = document.createElement("p");
-        date.textContent = todo.dueDate;
+        const buttonDiv = document.createElement("div");
+            buttonDiv.classList.add("main-todo-div-button");
 
         const button = document.createElement("button");
-        button.textContent = "✕";
-
+            button.textContent = "✕";
+            button.id = "button-to-delete-todo";
+            button.classList.add("main-todo-div-button");
 
         button.addEventListener("click", () => {
             project.removeTodo(index);
@@ -42,11 +50,48 @@ export const renderTodos = (todos, project, saveToStorage) => {
             renderTodos(project.todos, project);
         });
 
-        card.appendChild(checkBox);
-        card.appendChild(title);
-        card.appendChild(desc);
-        card.appendChild(date);
-        card.appendChild(button);
+
+        // Description
+
+        const divForDescriptionAndDateAndPriority = document.createElement("div");
+        divForDescriptionAndDateAndPriority.classList.add("div__for__desciprtion__and__priority__and__date");
+        const divForDescriptionSolely = document.createElement("div");
+        divForDescriptionSolely.classList.add("div__for__description");
+        const divForPriorityAndDate = document.createElement("div");
+        divForPriorityAndDate.classList.add("div__for__date__and__priority");
+
+
+        const desc = document.createElement("p");
+        desc.textContent = todo.description;
+
+        const date = document.createElement("p");
+        date.textContent = todo.dueDate;
+
+        const priority = document.createElement("p");
+        priority.textContent = todo.priority.charAt(0).toUpperCase() + todo.priority.slice(1);
+        priority.classList.add(`priority-${todo.priority}`);
+
+        const divider = document.createElement("div");
+        divider.id = "divider__todo";
+        
+
+        card.appendChild(buttonDiv);
+        buttonDiv.appendChild(button);
+        card.appendChild(mainTodoDiv);
+        mainTodoDiv.appendChild(checkBox);
+        mainTodoDiv.appendChild(title);
+
+        card.appendChild(divForDescriptionAndDateAndPriority);
+        card.appendChild(divForDescriptionSolely);
+        card.appendChild(divForPriorityAndDate);
+
+        divForDescriptionAndDateAndPriority.appendChild(divForDescriptionSolely);
+        divForDescriptionAndDateAndPriority.appendChild(divForPriorityAndDate);
+        divForDescriptionSolely.appendChild(desc);
+        divForPriorityAndDate.appendChild(date);
+        divForPriorityAndDate.appendChild(priority);
+        card.appendChild(divider);
+        
 
         mainContent.appendChild(card);
     });
