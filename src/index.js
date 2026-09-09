@@ -4,11 +4,29 @@ import { handleAddTodo, renderProjects, renderTodos } from "./display";
 import { openModal } from "./display";
 
 
-
-
-
 openModal();
 
 
 const defaultProject = createProject("Default");
-handleAddTodo(defaultProject);
+;
+
+
+// Local storage
+
+const saveToStorage = () => {
+    localStorage.setItem("project", JSON.stringify(defaultProject));
+};
+
+const loadFromStorage = () => {
+    return JSON.parse(localStorage.getItem("project"));
+};
+
+
+handleAddTodo(defaultProject, saveToStorage)
+
+const saved = loadFromStorage();
+
+if (saved) {
+    saved.todos.forEach(todo => defaultProject.addTodo(todo));
+    renderTodos(defaultProject.todos, defaultProject, saveToStorage);
+}

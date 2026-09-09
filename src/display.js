@@ -8,7 +8,7 @@ export const renderProjects = (projects) => {
     });
 };
 
-export const renderTodos = (todos, project) => {
+export const renderTodos = (todos, project, saveToStorage) => {
     
     mainContent.innerHTML = "";
 
@@ -38,6 +38,7 @@ export const renderTodos = (todos, project) => {
 
         button.addEventListener("click", () => {
             project.removeTodo(index);
+            saveToStorage();
             renderTodos(project.todos, project);
         });
 
@@ -84,7 +85,8 @@ export const openModal = () => {
 
 
 const button = document.querySelector("#add-todo-button-submit");
-export const handleAddTodo = (project) => {
+
+export const handleAddTodo = (project, saveToStorage) => {
 
     button.addEventListener("click", () => {
         const title = document.querySelector("#todo-title").value;
@@ -101,6 +103,7 @@ export const handleAddTodo = (project) => {
         }
 
         project.addTodo(createTodo(title, desc, dueDate, prior));
+        saveToStorage();
         renderTodos(project.todos, project);
 
         document.querySelector(".modal-overlay").classList.toggle("active");
