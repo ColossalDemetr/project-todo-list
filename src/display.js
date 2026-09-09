@@ -8,28 +8,52 @@ export const renderProjects = (projects) => {
     });
 };
 
-export const renderTodos = (todos) => {
+export const renderTodos = (todos, project) => {
+    
     mainContent.innerHTML = "";
-    todos.forEach((todo) => {
-    const card = document.createElement("div");
-    card.classList.add("todo-card");
 
-    const title = document.createElement("h3");
-    title.textContent = todo.title;
+    todos.forEach((todo, index) => {
+        const card = document.createElement("div");
+        card.classList.add("todo-card");
 
-    const desc = document.createElement("p");
-    desc.textContent = todo.description;
+        const checkBox = document.createElement("input")
+        checkBox.type = "checkbox";
 
-    const date = document.createElement("p");
-    date.textContent = todo.dueDate;
+        checkBox.addEventListener("click", () => {
+            todo.completed = !todo.completed;
+        });
 
-    card.appendChild(title);
-    card.appendChild(desc);
-    card.appendChild(date);
+        const title = document.createElement("h3");
+        title.textContent = todo.title;
 
-    mainContent.appendChild(card);
-});
+        const desc = document.createElement("p");
+        desc.textContent = todo.description;
+
+        const date = document.createElement("p");
+        date.textContent = todo.dueDate;
+
+        const button = document.createElement("button");
+        button.textContent = "✕";
+
+
+        button.addEventListener("click", () => {
+            project.removeTodo(index);
+            renderTodos(project.todos, project);
+        });
+
+        card.appendChild(checkBox);
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(date);
+        card.appendChild(button);
+
+        mainContent.appendChild(card);
+    });
+
 };
+
+
+
 
 export const openModal = () => {
     const addTodoButtonNow = document.querySelector("#add-todo-button");
@@ -53,6 +77,12 @@ export const openModal = () => {
         modalOverlay.classList.toggle("active");
     });
 };
+
+
+
+
+
+
 const button = document.querySelector("#add-todo-button-submit");
 export const handleAddTodo = (project) => {
 
@@ -71,7 +101,7 @@ export const handleAddTodo = (project) => {
         }
 
         project.addTodo(createTodo(title, desc, dueDate, prior));
-        renderTodos(project.todos);
+        renderTodos(project.todos, project);
 
         document.querySelector(".modal-overlay").classList.toggle("active");
         document.querySelector(".modal").classList.toggle("active");

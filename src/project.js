@@ -7,7 +7,12 @@ export function createProject(projectName) {
     };
 
 
-    return { name: projectName, todos, addTodo };
+
+    const removeTodo = (index) => {
+        todos.splice(index, 1);
+    };
 
 
+
+    return { name: projectName, todos, addTodo, removeTodo};
 };

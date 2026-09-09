@@ -8,7 +8,6 @@ import { openModal } from "./display";
 
 
 openModal();
-// handleAddTodo();
 
 
 const defaultProject = createProject("Default");
