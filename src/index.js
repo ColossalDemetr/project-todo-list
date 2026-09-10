@@ -7,8 +7,8 @@ import { openModal } from "./display";
 openModal();
 
 
+
 const defaultProject = createProject("Default");
-;
 
 
 // Local storage
@@ -16,6 +16,8 @@ const defaultProject = createProject("Default");
 const saveToStorage = () => {
     localStorage.setItem("project", JSON.stringify(defaultProject));
 };
+
+renderProjects([defaultProject], saveToStorage);
 
 const loadFromStorage = () => {
     return JSON.parse(localStorage.getItem("project"));
@@ -28,5 +30,6 @@ const saved = loadFromStorage();
 
 if (saved) {
     saved.todos.forEach(todo => defaultProject.addTodo(todo));
-    renderTodos(defaultProject.todos, defaultProject, saveToStorage);
 }
+
+renderTodos(defaultProject.todos, defaultProject, saveToStorage);

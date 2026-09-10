@@ -2,15 +2,37 @@ import createTodo from "./todo";
 
 const mainContent = document.querySelector(".main-content");
 
-export const renderProjects = (projects) => {
+export const renderProjects = (projects, saveToStorage) => {
     projects.forEach((project) => {
-        console.log(`${project.name}`);
+        const li = document.createElement("li");
+        li.classList.add("sidebar-list-item");
+
+        const a = document.createElement("a");
+        a.textContent = project.name;
+
+        const parent = document.querySelector("#projects-list");
+        li.appendChild(a);
+
+        li.addEventListener("click", () => {
+            renderTodos(project.todos, project, saveToStorage);
+        });
+
+
+        parent.appendChild(li);
     });
 };
 
 export const renderTodos = (todos, project, saveToStorage) => {
-    
+
     mainContent.innerHTML = "";
+
+    if (todos.length === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = "No Projects/Todo's Yet";
+        empty.classList.add("empty-state");
+        mainContent.appendChild(empty);
+        return;
+    }
 
     todos.forEach((todo, index) => {
         // Main Container
@@ -26,8 +48,14 @@ export const renderTodos = (todos, project, saveToStorage) => {
         checkBox.type = "checkbox";
         checkBox.classList.add("main-todo-div");
 
+        if (todo.completed) {
+            checkBox.checked = true;
+            card.classList.add("completed");
+        }
+
         checkBox.addEventListener("click", () => {
             todo.completed = !todo.completed;
+            card.classList.toggle("completed", todo.completed);
         });
 
         const title = document.createElement("h3");
@@ -47,7 +75,7 @@ export const renderTodos = (todos, project, saveToStorage) => {
         button.addEventListener("click", () => {
             project.removeTodo(index);
             saveToStorage();
-            renderTodos(project.todos, project);
+            renderTodos(project.todos, project, saveToStorage);
         });
 
 

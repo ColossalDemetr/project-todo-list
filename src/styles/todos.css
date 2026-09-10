@@ -23,6 +23,38 @@
 .main-todo-div {
     display: flex;
     margin-bottom: 0.4rem;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.main-todo-div input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid #386641;
+    border-radius: 0.3rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease;
+}
+
+.main-todo-div input[type="checkbox"]:checked {
+    background-color: #386641;
+}
+
+.main-todo-div input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0.35rem;
+    height: 0.6rem;
+    border: 2px solid #F2E8CF;
+    border-top: none;
+    border-left: none;
+    transform: translate(-50%, -60%) rotate(45deg);
 }
 
 .main-todo-div-button {
@@ -98,4 +130,17 @@
 .priority-low {
     font-weight: bold;
     color: green;
+}
+
+.todo-card.completed h3,
+.todo-card.completed p {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.empty-state {
+    color: #BC4749;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2rem;
 }
