@@ -30,12 +30,22 @@ const rerender = () => {
         currentProject = project;
         renderTodos(currentProject.todos, currentProject, saveToStorage);
     }, currentProject, (projectToDelete) => {
+        const count = projectToDelete.todos.length;
+        const confirmed = confirm(`You are about to delete "${projectToDelete.name}" with ${count} todo(s). Are you sure?`);
+        if (!confirmed) return;
+
         projects.splice(projects.indexOf(projectToDelete), 1);
-        if (projects.length === 0) projects.push(createProject("Default"));
-        currentProject = projects[0];
         saveToStorage();
-        rerender();
-        renderTodos(currentProject.todos, currentProject, saveToStorage);
+
+        if (projects.length === 0) {
+            currentProject = null;
+            rerender();
+            renderTodos([], null, saveToStorage);
+        } else {
+            currentProject = projects[0];
+            rerender();
+            renderTodos(currentProject.todos, currentProject, saveToStorage);
+        }
     });
 };
 
