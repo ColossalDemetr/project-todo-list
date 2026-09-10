@@ -2,21 +2,45 @@ import createTodo from "./todo";
 
 const mainContent = document.querySelector(".main-content");
 
-export const renderProjects = (projects, saveToStorage) => {
+export const renderProjects = (projects, saveToStorage, onSelect, activeProject, onDelete) => {
+    const parent = document.querySelector("#projects-list");
+    parent.innerHTML = "";
+    const title = document.createElement("p");
+    title.textContent = "PROJECTS";
+    title.classList.add("paragraph-sidebar");
+    parent.appendChild(title);
+
     projects.forEach((project) => {
         const li = document.createElement("li");
         li.classList.add("sidebar-list-item");
 
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("project-item-wrapper");
+
         const a = document.createElement("a");
         a.textContent = project.name;
 
-        const parent = document.querySelector("#projects-list");
-        li.appendChild(a);
-
-        li.addEventListener("click", () => {
-            renderTodos(project.todos, project, saveToStorage);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "✕";
+        deleteBtn.id = "button__delete__project"
+        deleteBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            onDelete(project);
         });
 
+        wrapper.appendChild(a);
+        wrapper.appendChild(deleteBtn);
+        li.appendChild(wrapper);
+
+        if (activeProject && project.name === activeProject.name) {
+            li.classList.add("active-project");
+        }
+
+        li.addEventListener("click", () => {
+            document.querySelectorAll(".sidebar-list-item").forEach(el => el.classList.remove("active-project"));
+            li.classList.add("active-project");
+            onSelect(project);
+        });
 
         parent.appendChild(li);
     });
@@ -159,14 +183,13 @@ export const openModal = () => {
 
 const button = document.querySelector("#add-todo-button-submit");
 
-export const handleAddTodo = (project, saveToStorage) => {
-
+export const handleAddTodo = (getProject, saveToStorage) => {
     button.addEventListener("click", () => {
+        const project = getProject();
         const title = document.querySelector("#todo-title").value;
         const desc = document.querySelector("#todo-desc").value;
         const dueDate = document.querySelector("#todo-date").value;
         const prior = document.querySelector("#todo-prior").value;
-    
 
         if (!title) {
             const toast = document.querySelector("#toast");
@@ -177,7 +200,7 @@ export const handleAddTodo = (project, saveToStorage) => {
 
         project.addTodo(createTodo(title, desc, dueDate, prior));
         saveToStorage();
-        renderTodos(project.todos, project);
+        renderTodos(project.todos, project, saveToStorage);
 
         document.querySelector(".modal-overlay").classList.toggle("active");
         document.querySelector(".modal").classList.toggle("active");

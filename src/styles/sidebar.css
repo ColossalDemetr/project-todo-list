@@ -24,20 +24,57 @@
 
     padding: 1rem;
 
+    gap: 1rem;
+
 }
 
 #add-todo-button {
     height: 70px;
-    width: auto;
+    width: 10rem;
 
     border-radius: 1.5rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.6s ease;
+
+    box-sizing: border-box;
 
     cursor: pointer;
+
+    border: 2px solid #BC4749;
+    background-color: transparent;
+
+    font-weight: bold;
+    color: #BC4749;
 }
 
 #add-todo-button:hover {
-    background-color: rgb(202, 199, 199);
+    background-color: salmon;
+    font-weight: 800;
+    transform: translateY(-5%);
+
+}
+
+#add-project-button {
+    height: 70px;
+    width: 10rem;
+
+    border-radius: 1.5rem;
+    transition: background-color 0.3s ease, transform 1s ease;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    border: 2px solid #386641;
+    background-color: transparent;
+
+    font-weight: bold;
+    color: #386641;
+}
+
+#add-project-button:hover {
+    background-color: rgb(112, 184, 112);
+    font-weight: 800;
+    transform: translateY(-5%);
 
 }
 
@@ -60,4 +97,39 @@
 
 .sidebar-list-item {
     padding-left: 1.5rem;
+}
+
+.active-project {
+    font-weight: bold;
+    color: #386641;
+    border-left: 3px solid #386641;
+}
+
+.project-item-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#button__delete__project {
+    cursor: pointer;
+
+    padding: 0.2rem;
+    background-color: #BC4749;
+    border: none;
+
+    border-radius: 1rem;
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    transition: background-color 0.3s ease-in-out;
+}
+
+#button__delete__project:hover {
+    background-color: #d65052;
+}
+
+#button__delete__project:active {
+    background-color: #f05d60;
 }

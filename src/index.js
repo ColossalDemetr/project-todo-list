@@ -1,35 +1,55 @@
-import createTodo from "./todo";
 import { createProject } from "./project";
 import { handleAddTodo, renderProjects, renderTodos } from "./display";
 import { openModal } from "./display";
 
-
 openModal();
 
-
-
-const defaultProject = createProject("Default");
-
-
-// Local storage
+let projects = [createProject("Default")];
+let currentProject = projects[0];
 
 const saveToStorage = () => {
-    localStorage.setItem("project", JSON.stringify(defaultProject));
+    localStorage.setItem("projects", JSON.stringify(projects));
 };
-
-renderProjects([defaultProject], saveToStorage);
 
 const loadFromStorage = () => {
-    return JSON.parse(localStorage.getItem("project"));
+    return JSON.parse(localStorage.getItem("projects"));
 };
 
-
-handleAddTodo(defaultProject, saveToStorage)
-
 const saved = loadFromStorage();
-
 if (saved) {
-    saved.todos.forEach(todo => defaultProject.addTodo(todo));
+    projects = saved.map(p => {
+        const project = createProject(p.name);
+        p.todos.forEach(todo => project.addTodo(todo));
+        return project;
+    });
+    currentProject = projects[0];
 }
 
-renderTodos(defaultProject.todos, defaultProject, saveToStorage);
+const rerender = () => {
+    renderProjects(projects, saveToStorage, (project) => {
+        currentProject = project;
+        renderTodos(currentProject.todos, currentProject, saveToStorage);
+    }, currentProject, (projectToDelete) => {
+        projects.splice(projects.indexOf(projectToDelete), 1);
+        if (projects.length === 0) projects.push(createProject("Default"));
+        currentProject = projects[0];
+        saveToStorage();
+        rerender();
+        renderTodos(currentProject.todos, currentProject, saveToStorage);
+    });
+};
+
+rerender();
+renderTodos(currentProject.todos, currentProject, saveToStorage);
+handleAddTodo(() => currentProject, saveToStorage);
+
+document.querySelector("#add-project-button").addEventListener("click", () => {
+    const name = prompt("Project name:");
+    if (!name) return;
+    const newProject = createProject(name);
+    projects.push(newProject);
+    currentProject = newProject;
+    saveToStorage();
+    rerender();
+    renderTodos(currentProject.todos, currentProject, saveToStorage);
+});
